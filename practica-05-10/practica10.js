@@ -1,31 +1,60 @@
-window.onload=main;
+window.onload = main;
 
-function main(){
-    document.formulario.submit.onclick=validar;
+// Javier Aragoneses
+
+function main() {
+    document.formulario.submit.onclick = validar;
 }
 
-function validar (event){
-    const wwww = "www.";
-    const http = "http://"+wwww;
-    const https = "https://"+wwww;
-    event.preventDefault();
-    var url = document.formulario.url.value;
+function validar(event) {
+    let url = document.formulario.url.value;
+    document.formulario.mensaje.value = validateURL(url) ? "URL válida" : "URL inválida";
 
-    if (url.startsWith(http)){
-        if (console.log(url.charAt(http.length))){
-                
-        }
+}
 
-    }
-    else if (url.startsWith(https)){
+function validateURL(url){
+    return validateProtocol(url) && validateDomain(url) && validateTopDomain(url);
+}
 
-    }
-    else if (url.startsWith(wwww)){
-
+function validateProtocol(url) { // comprobar protocolo
+    const www = "www.";
+    const http = "http://" + www;
+    const https = "https://" + www;
+    let isValid = false;
+    if (url.startsWith(http)) {
+        isValid = true;
+    } else if (url.startsWith(https)) {
+        isValid = true;
+    } else if (url.startsWith(www)) {
+        isValid = true;
     } else {
-        // es falso 
+        isValid = false;
     }
+    console.log(isValid);
+    return isValid; 
+}
+
+function validateTopDomain(url) {
+    let topDomain = url.substring(url.indexOf('.', url.indexOf('.') + 1) + 1, url.length); // extraer top domain
+    return isLetter(topDomain) && topDomain.length <= 4 && topDomain.length >= 2;
+}
 
 
 
+function validateDomain(url) {
+    let domainName = url.substring(url.indexOf('.') + 1, url.indexOf('.', url.indexOf('.') + 1)); // extraer subdomain
+    let valid = false;
+    return isLetter(domainName.charAt(0)) && // Comprobar primera letra
+        (isLetter(domainName.charAt(domainName.length - 1)) || isNumber(domainName.charAt(domainName.length - 1))) // Comprobar si última letra es letra o número
+        && /^[A-Za-z0-9\-ñÀ-ú]*$/.test(domainName); // comprobar caracteres internos del dominio
+
+
+}
+
+function isLetter(str) {
+    return /^[a-zA-ZñÀ-ú]+$/.test(str); // comprobar si es letra
+}
+
+function isNumber(character) {
+    return !isNaN(character); // comprobar si es número
 }
