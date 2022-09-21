@@ -6,7 +6,7 @@ function main() {
     document.formulario.submit.onclick = validar;
 }
 
-function validar(event) {
+function validar() {
     let url = document.formulario.url.value;
     document.formulario.mensaje.value = validateURL(url) ? "URL válida" : "URL inválida";
 
@@ -30,7 +30,6 @@ function validateProtocol(url) { // comprobar protocolo
     } else {
         isValid = false;
     }
-    console.log(isValid);
     return isValid; 
 }
 
