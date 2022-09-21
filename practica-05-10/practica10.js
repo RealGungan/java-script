@@ -42,7 +42,6 @@ function validateTopDomain(url) {
 
 function validateDomain(url) {
     let domainName = url.substring(url.indexOf('.') + 1, url.indexOf('.', url.indexOf('.') + 1)); // extraer subdomain
-    let valid = false;
     return isLetter(domainName.charAt(0)) && // Comprobar primera letra
         (isLetter(domainName.charAt(domainName.length - 1)) || isNumber(domainName.charAt(domainName.length - 1))) // Comprobar si última letra es letra o número
         && /^[A-Za-z0-9\-ñÀ-ú]*$/.test(domainName); // comprobar caracteres internos del dominio
