@@ -9,13 +9,12 @@ function comprobar() {
 
     console.log(/^[A-Za-z]+$/.test(x));
 
-    if (/^[A-Za-z]+$/.test(x)) {
-        if (x.length >= 3 && x.length <= 27) {
-            document.forms.form.mensaje.value = true;
-        }
+    if (/^[A-Za-z]+$/.test(x) && x.length >= 3 && x.length <= 27) {
+
+        document.forms.form.mensaje.value = true;
+
     } else {
         document.forms.form.mensaje.value = false
 
     }
-
 }
