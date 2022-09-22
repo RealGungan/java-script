@@ -5,16 +5,12 @@ function inicio() {
 }
 
 function comprobar() {
-    var x = document.forms.form.nombre.value;
+    var x = document.forms["form"]["nombre"].value;
 
-    console.log(/^[A-Za-z]+$/.test(x));
-
-    if (/^[A-Za-z]+$/.test(x) && x.length >= 3 && x.length <= 27) {
-
-        document.forms.form.mensaje.value = true;
-
-    } else {
-        document.forms.form.mensaje.value = false
-
+    if (/[A-Za-z]/.test(x)) {
+        if (x.length >= 3 && x.length <= 27) {
+            document.forms["form"]["mensaje"].value = true;
+        }
     }
+
 }

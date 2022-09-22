@@ -5,18 +5,43 @@ function inicio() {
 }
 
 function comprobar() {
-    // var x = document.forms["form"]["fecha"].value;
+    //variable for date
+    var date = document.forms["form"]["fecha"].value;
 
-    x = "1/1/22";
+    //variable to detect if all are valid numbers
+    var all_numbers = false;
 
-    var cont = 0;
+    //variable to detect if all are valid
+    var error = 0;
 
-    console.log(x.substring(0, 1));
-    console.log(x.substring(2, 3));
-    console.log(x.substring(4, 6));
-
-    if (isNaN(x.substring(0, 1)) && isNaN(x.substring(2, 3)) && isNaN(x.substring(4, 5))) {
-        alert('s')
+    //locate the day
+    var index = date.indexOf("/", 0);
+    var day = date.substring(0, index);
+    console.log(day);
+    //validate the day
+    if (isNaN(day) || day.length > 2 || day < 0 || day > 31) {
+        error = 1;
+    } else {
+        //locate the month
+        var index_mes = date.indexOf("/", index + 1);
+        var mes = date.substring(index + 1, index_mes);
+        //validate the month
+        if (isNaN(mes) || mes.length > 2 || mes < 0 || mes > 12) {
+            error = 1;
+        } else {
+            //locate the year
+            var ano = date.substring(index_mes + 1, date.length);
+            //validate the year
+            if (isNaN(date.substring(index_mes + 1, date.length)) || ano.length > 4) {
+                error = 1;
+            }
+        }
     }
 
+    //if one of them is invalid, show error. Else, show true in "mensaje"
+    if (error == 1 || date == "") {
+        alert("El formato tiene que ser dd/mm/yyyy")
+    } else {
+        document.forms.form.mensaje.value = true;
+    }
 }
