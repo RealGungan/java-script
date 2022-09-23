@@ -39,12 +39,15 @@ function validarPrimerasLetras(localidad) {
 function isLetter(str) {
     return /^[a-zA-ZñÀ-ú]+$/.test(str); // comprobar si es letra
 }
-//validamos que a continuación sea letras y  espacios
+//funcion para detecta numeros
+
+//validamos que a continuación sea letras y  espacios y que no sean numeros
 function validarCaracteres(localidad) {
     let valido = true;
     let espacio = / /;
+    let numeros =/1,2,3,4,5,6,7,8,9,0/;
     let restoLetras = localidad.substring(3, localidad.length);
-    if (!(isLetter(restoLetras) || espacio.test(restoLetras))) {
+    if (!(isLetter(restoLetras) || espacio.test(restoLetras))|| isNaN(restoLetras)) {
         valido = false;
     }
     return valido;
