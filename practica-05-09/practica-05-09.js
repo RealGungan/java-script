@@ -1,7 +1,7 @@
+window.onload = inicio;
+
 function inicio() {
-    document.form.nombre.value = "Daniel";
-    document.form.aceptar.onclick = procesar;
-    document.form.onsubmit = validaciones;
+    document.forms.form.button.onclick = comprobar;
 }
 
 function comprobar() {

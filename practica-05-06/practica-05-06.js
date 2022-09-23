@@ -1,33 +1,22 @@
+window.onload = inicio;
+
 function inicio() {
-    document.form.nombre.value = "Daniel";
-    document.form.aceptar.onclick = procesar;
-    document.form.onsubmit = validaciones;
+    document.forms.form.button.onclick = comprobar;
 }
 
 function comprobar() {
-    var x = document.forms.form.cadena.value.toLowerCase();
-    var checkX = document.forms["form"]["vocal"].value.toLowerCase();
-    var cont = 0;
-    var checkX_long = "";
+    debugger;
 
+    var cadena = document.forms.form.cadena.value;
+    var cadena_corta = document.forms.form.subcadena.value;
+    var cadena_larga = document.forms.form.subcadena.value;
+    var count = 0;
 
-    if (checkX.length > 1) {
-        for (var i = 0; i < x.length; i++) {
-            checkX_long += x[i];
-            console.log(checkX_long);
-            if (checkX_long == checkX) {
-                checkX_long = "";
-                cont++;
-                document.forms["form"]["mensaje"].value = cont;
-            }
-        }
+    if (cadena_corta.length > 1) {
+        count = cadena.split(cadena_larga).length - 1;
     } else {
-        for (var i = 0; i < x.length; i++) {
-            if (x[i] == checkX) {
-                cont++;
-                document.forms["form"]["mensaje"].value = cont;
-            }
-        }
+        count = cadena.split(cadena_corta).length - 1;
     }
 
+    document.forms.form.mensaje.value = count;
 }
