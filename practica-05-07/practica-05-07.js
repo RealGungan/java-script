@@ -6,7 +6,6 @@ function inicio() {
 
 
 function comprobar() {
-    ç
     var nombre = document.forms.form.nombre.value;
 
     //crear un buble para comprobar si la longitud está comprendida entre 3 y 27
