@@ -64,7 +64,7 @@ function validarUltimasLetras(localidad) {
 
 //funcion sustituta para validar letra
 function isLetra(str) {  
-    const letras="abcdefghijklmnñopqrstuvwxyz ";
+    const letras="abcdefghijklmnñopqrstuvwxyzáéíóú ";
     str = str.toLowerCase();
     for(let i=0;i< str.length;i++){
         if(!(letras.includes(str[i]))){
