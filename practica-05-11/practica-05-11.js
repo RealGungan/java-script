@@ -17,8 +17,8 @@ function validarLongitud(localidad) {
     if (!(localidad.length > 7 && localidad.length < 35)) {
         console.log(localidad);
         valido = false;
-        console.log("la localidad es " + valido);
     }
+    console.log("la longitud de localidad es " + valido);
     return valido;
 }
 
@@ -27,55 +27,53 @@ function validarPrimerasLetras(localidad) {
     let primerLetras = localidad.substring(0, 3); //coge los primeros tres caracteres de la localidad
     console.log(primerLetras);
     let valido = true;
-    if (!(isLetter(primerLetras))) {
+    if (!(isLetra(primerLetras))) {
         valido = false;
-        console.log("los primeros caracteres no son letras");
     }
+    console.log("las primeras letras son " + valido);
     return valido;
 
 }
-//funcion de javi para saber si es letra
-//.test indica si existe 
-function isLetter(str) {
-    return /^[a-zA-ZñÀ-ú]+$/.test(str); // comprobar si es letra
-}
-//funcion para detecta numeros
-function isNumber(character) {
-    return !isNaN(character); // comprobar si es número
-}
+
 
 //validamos que a continuación sea letras y  espacios y que no sean numeros
 function validarCaracteres(localidad) {
+    let restoLetras = localidad.substring(3,localidad.length-2);
     let valido = true;
-    let espacio = / /;
-    let restoLetras = localidad.substring(3, localidad.length);
-    if (!isLetter(restoLetras)&& !espacio.test(restoLetras) || isNumber(restoLetras)) {
-        valido = false; 
+    console.log(restoLetras);
+    if (!(isLetra(restoLetras))) {
+        valido = false;
     }
-    console.log(valido);
+    console.log("el resto de caracteres son " + valido);
     return valido;
     
 }
 
 //validamos que termine por dos letras
 function validarUltimasLetras(localidad) {
+    let ultimasLetras = localidad.substring(localidad.length - 2);
     let valido = true;
-    const ultimos = 2;
-    let ultimasLetras = localidad.substring(localidad.length - ultimos);
-    if (!(isLetter(ultimasLetras))) {
+    console.log(ultimasLetras);
+    if (!(isLetra(ultimasLetras))) {
         valido = false;
-
     }
+    console.log("las ultimas letras son " + valido);
     return valido;
 }
 
 
+//funcion sustituta para validar letra
+function isLetra(str) {  
+    const letras="abcdefghijklmnñopqrstuvwxyz ";
+    str = str.toLowerCase();
+    for(let i=0;i< str.length;i++){
+        if(!(letras.includes(str[i]))){
+            return false;
+        }
+    }
+    return true;       
+}
 
 
-
-
-
-
-
-
-
+/*
+}*/
