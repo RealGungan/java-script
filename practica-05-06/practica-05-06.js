@@ -7,11 +7,11 @@ function inicio() {
 function comprobar() {
 
     //variable para detectar la cadena en la que vamos a buscar similitudes
-    var cadena = document.forms.form.cadena.value;
+    var cadena = document.forms.form.cadena.value.toLowerCase();
     //variable si la subcadena es de un único carácter
-    var cadena_corta = document.forms.form.subcadena.value;
+    var cadena_corta = document.forms.form.subcadena.value.toLowerCase();
     //variable si la subcadena es de más de un carácter
-    var cadena_larga = document.forms.form.subcadena.value;
+    var cadena_larga = document.forms.form.subcadena.value.toLowerCase();
     //variable para contar cuántas veces aparece la subcadena
     var count = 0;
 
