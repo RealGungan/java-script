@@ -5,6 +5,7 @@ function inicio() {
 }
 
 function comprobar() {
+    debugger;
     //variable for date
     var date = document.forms["form"]["fecha"].value;
 
@@ -32,7 +33,11 @@ function comprobar() {
         } else {
             //locate the year
             var ano = date.substring(index_mes + 1, date.length);
-            //validate the year
+            //validate the year and cehck if it's leap
+            if ((ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0) && day > 29 && mes == 2) { 
+                document.forms.form.mensaje.value = false;
+                error = 1;
+            }
             if (isNaN(date.substring(index_mes + 1, date.length)) || ano.length > 4) {
                 document.forms.form.mensaje.value = false;
                 error = 1;

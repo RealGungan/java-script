@@ -49,8 +49,18 @@ function validateDomain(url) {
 
 }
 
-function isLetter(str) {
-    return /^[a-zA-ZñÀ-ú]+$/.test(str); // comprobar si es letra
+// function isLetter(str) {
+//     return /^[a-zA-ZñÀ-ú]+$/.test(str); // comprobar si es letra
+// }
+function isLetter(str) {  
+    const letras="abcdefghijklmnñopqrstuvwxyzáéíóú ";
+    str = str.toLowerCase();
+    for(let i=0;i< str.length;i++){
+        if(!(letras.includes(str[i]))){
+            return false;
+        }
+    }
+    return true;       
 }
 
 function isNumber(character) {
