@@ -5,7 +5,7 @@ function main() {
 function validar() {
     let palindromo = document.formulario.palindromo.value;
     document.formulario.mensaje.value = validarFrase(palindromo) ? "Palíndromo" : "No es Palíndromo";
-    document.formulario.mensaje.value = cadenaInversa(palindromo);
+    //document.formulario.mensaje.value = cadenaInversa(palindromo);
 }
 function validarFrase(palindromo) {
     return validarPalindromo(palindromo);
