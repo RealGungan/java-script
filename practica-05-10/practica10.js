@@ -53,7 +53,7 @@ function validateDomain(url) {
 //     return /^[a-zA-ZñÀ-ú]+$/.test(str); // comprobar si es letra
 // }
 function isLetter(str) {  
-    const letras="abcdefghijklmnñopqrstuvwxyzáéíóú ";
+    const letras="abcdefghijklmnñopqrstuvwxyzáéíóúü ";
     str = str.toLowerCase();
     for(let i=0;i< str.length;i++){
         if(!(letras.includes(str[i]))){
