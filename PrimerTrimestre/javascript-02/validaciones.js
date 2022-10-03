@@ -1,4 +1,4 @@
-//funcion es cif ej 2
+//funcion es cif ej 3
 function esCif(cadenaCif) {
     cadenaCif = cadenaCif.toUpperCase().trim();
     let sumaPares = 0;
@@ -86,13 +86,13 @@ function esCif(cadenaCif) {
     return 2; //cif erroneo o caracter de control erroneo
 
 }
-//ejercicio 3  ----- para este ejercicio nos falta el ejercicio de nif
+//ejercicio 4  ----- para este ejercicio nos falta el ejercicio de nif
 //console.log(esCif("q7850003J"));
 function nif_Cif(parametro){
     return respuesta;
 
 }
-//-------------------------------ejercicio 4  de condigo control 
+//-------------------------------ejercicio 5  de condigo control 
 
 function codigosControl(banco, sucursal, cuenta) {
     if (banco.length != 4 || sucursal.length != 4 || cuenta.length != 10 || isNaN(banco) || isNaN(sucursal) || isNaN(cuenta)) {
@@ -125,7 +125,7 @@ console.log(codigosControl("0186","8018","6078591188"));
 //31838056761780852105
 //01868018076078591188
 
-//---------------ejercicio 5  calculo IBAN ------------------------
+//---------------ejercicio 6  calculo IBAN ------------------------
 function calculoIBANEspanya(codigoCuenta){
     if(codigoCuenta.length != 20){
         return -1;
