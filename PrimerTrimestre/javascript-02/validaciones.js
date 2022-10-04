@@ -183,8 +183,6 @@ function nif_Cif(cadenaNifcif) {
                  }
            }
      }
-   
-          
     
 }
 //-------------------------------ejercicio 5  de condigo control 
