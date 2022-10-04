@@ -150,15 +150,15 @@ console.log(calculoIBANEspanya("12345678912345678912"));
 
 //---------------ejercicio 7 Comprobar IBAN ------------------------
 function comprobar_IBAN(codigo_IBAN) {
-    codigo_IBAN = "ES4600781315928140332685";
     var letter_num = {
         A: 10, B: 11, C: 12, D: 13, E: 14, F: 15, G: 16, H: 17, I: 18, J: 19, K: 20, L: 21, M: 22, N: 23, O: 24, P: 25, Q: 26, R: 27, S: 28, T: 29, U: 30, V: 31, W: 32, X: 33, Y: 34, Z: 35
     }
-    check = codigo_IBAN.substring(codigo_IBAN.length - 4);
+    check = codigo_IBAN.substring(0,4);
     check_nums = "";
     console.log(check);
 
     for (let i = 0; i < check.length; i++) {
+        console.log(check[i]);
         if (isNaN(check[i]))
             check_nums += letter_num[check_nums[i]];
         else
@@ -171,3 +171,4 @@ function comprobar_IBAN(codigo_IBAN) {
     else
         return false;
 }
+console.log(comprobar_IBAN("ES4600781315928140332685"))
