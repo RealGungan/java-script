@@ -88,7 +88,7 @@ function esCif(cadenaCif) {
 }
 //ejercicio 4  ----- para este ejercicio nos falta el ejercicio de nif
 //console.log(esCif("q7850003J"));
-function nif_Cif(parametro){
+function nif_Cif(parametro) {
     return respuesta;
 
 }
@@ -101,7 +101,7 @@ function codigosControl(banco, sucursal, cuenta) {
     let sumaBanco = parseInt(banco[0]) * 4 + parseInt(banco[1]) * 8 + parseInt(banco[2]) * 5 + parseInt(banco[3]) * 10;
     let sumaSucursal = parseInt(banco[0]) * 9 + parseInt(banco[1]) * 7 + parseInt(banco[2]) * 3 + parseInt(banco[3]) * 6;
     let resultado = 11 - (sumaBanco + sumaSucursal) % 11;
-    console.log(sumaBanco + " " + sumaSucursal+ " " +resultado);
+    console.log(sumaBanco + " " + sumaSucursal + " " + resultado);
     if (resultado == 10) {
         resultado = 1;
     }
@@ -116,33 +116,58 @@ function codigosControl(banco, sucursal, cuenta) {
         numero3 = 0;
     }
     //truco: si es numero y quiero que al imprimir sea String puedo  poner " " y concatenar con + y asi no se suma 
-    return ""+resultado + numero3;
+    return "" + resultado + numero3;
 }
 //para probar la funcion . en esta funcion no me funciona el primer digito, el segundo su lo coge
 //ver por que no cambia en resultado y siempre sale 1 y en numero3 si
-console.log(codigosControl("0186","8018","6078591188"));
+console.log(codigosControl("0186", "8018", "6078591188"));
 //64
 //31838056761780852105
 //01868018076078591188
 
 //---------------ejercicio 6  calculo IBAN ------------------------
-function calculoIBANEspanya(codigoCuenta){
-    if(codigoCuenta.length != 20){
+function calculoIBANEspanya(codigoCuenta) {
+    if (codigoCuenta.length != 20) {
         return -1;
     }
     let caracteres = "ES00";
-   //codigoCuenta + caracteres;
-   let NuevoCaracteres = caracteres.replace("E","14");
-   NuevoCaracteres= NuevoCaracteres.replace("S","28");
+    //codigoCuenta + caracteres;
+    let NuevoCaracteres = caracteres.replace("E", "14");
+    NuevoCaracteres = NuevoCaracteres.replace("S", "28");
     let numero = codigoCuenta + NuevoCaracteres;
-    let codigoControl = 98 - parseInt(numero)%97;
-    if( codigoControl < 10){
+    let codigoControl = 98 - parseInt(numero) % 97;
+    if (codigoControl < 10) {
         codigoControl = "0" + codigoControl;
-    }else{
+    } else {
+        console.log("12345678912345678912");
         codigoControl = codigoControl.toString();
     }
     console.log(codigoControl);
     let iban = "ES" + codigoControl + codigoCuenta;
     return iban;
 }
-console.log( calculoIBANEspanya("12345678912345678912"));
+console.log(calculoIBANEspanya("12345678912345678912"));
+
+//---------------ejercicio 7 Comprobar IBAN ------------------------
+function comprobar_IBAN(codigo_IBAN) {
+    codigo_IBAN = "ES4600781315928140332685";
+    var letter_num = {
+        A: 10, B: 11, C: 12, D: 13, E: 14, F: 15, G: 16, H: 17, I: 18, J: 19, K: 20, L: 21, M: 22, N: 23, O: 24, P: 25, Q: 26, R: 27, S: 28, T: 29, U: 30, V: 31, W: 32, X: 33, Y: 34, Z: 35
+    }
+    check = codigo_IBAN.substring(codigo_IBAN.length - 4);
+    check_nums = "";
+    console.log(check);
+
+    for (let i = 0; i < check.length; i++) {
+        if (isNaN.check[i])
+            check_nums += letter_num[comprobar_IBAN[i]];
+        else
+            check_nums += check[i];
+    }
+    console.log(check_nums);
+    // dividir número obtenido
+    if (parseInt(check_nums % 97 == 1))
+        return true;
+    else
+        return false;
+}
