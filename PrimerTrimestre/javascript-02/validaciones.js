@@ -153,16 +153,16 @@ function comprobar_IBAN(codigo_IBAN) {
     var letter_num = {
         A: 10, B: 11, C: 12, D: 13, E: 14, F: 15, G: 16, H: 17, I: 18, J: 19, K: 20, L: 21, M: 22, N: 23, O: 24, P: 25, Q: 26, R: 27, S: 28, T: 29, U: 30, V: 31, W: 32, X: 33, Y: 34, Z: 35
     }
-    check = codigo_IBAN.substring(0,4);
+    check = codigo_IBAN.substring(0, 4);
     check_nums = "";
     console.log(check);
 
     for (let i = 0; i < check.length; i++) {
-        console.log(check[i]);
-        if (isNaN(check[i]))
-            check_nums += letter_num[check_nums[i]];
-        else
+        if (isNaN(check[i])) {
+            check_nums += letter_num[check[i]];
+        } else {
             check_nums += check[i];
+        }
     }
     console.log(check_nums);
     // dividir número obtenido
