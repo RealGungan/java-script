@@ -101,7 +101,7 @@ function codigosControl(banco, sucursal, cuenta) {
     let sumaBanco = parseInt(banco[0]) * 4 + parseInt(banco[1]) * 8 + parseInt(banco[2]) * 5 + parseInt(banco[3]) * 10;
     let sumaSucursal = parseInt(banco[0]) * 9 + parseInt(banco[1]) * 7 + parseInt(banco[2]) * 3 + parseInt(banco[3]) * 6;
     let resultado = 11 - (sumaBanco + sumaSucursal) % 11;
-    console.log(sumaBanco + " " + sumaSucursal + " " + resultado);
+    // console.log(sumaBanco + " " + sumaSucursal + " " + resultado);
     if (resultado == 10) {
         resultado = 1;
     }
@@ -120,7 +120,7 @@ function codigosControl(banco, sucursal, cuenta) {
 }
 //para probar la funcion . en esta funcion no me funciona el primer digito, el segundo su lo coge
 //ver por que no cambia en resultado y siempre sale 1 y en numero3 si
-console.log(codigosControl("0186", "8018", "6078591188"));
+// console.log(codigosControl("0186", "8018", "6078591188"));
 //64
 //31838056761780852105
 //01868018076078591188
@@ -142,33 +142,72 @@ function calculoIBANEspanya(codigoCuenta) {
         console.log("12345678912345678912");
         codigoControl = codigoControl.toString();
     }
-    console.log(codigoControl);
+    // console.log(codigoControl);
     let iban = "ES" + codigoControl + codigoCuenta;
     return iban;
 }
-console.log(calculoIBANEspanya("12345678912345678912"));
+// console.log(calculoIBANEspanya("12345678912345678912"));
 
 //---------------ejercicio 7 Comprobar IBAN ------------------------
 function comprobar_IBAN(codigo_IBAN) {
     let letter_num = {
         A: 10, B: 11, C: 12, D: 13, E: 14, F: 15, G: 16, H: 17, I: 18, J: 19, K: 20, L: 21, M: 22, N: 23, O: 24, P: 25, Q: 26, R: 27, S: 28, T: 29, U: 30, V: 31, W: 32, X: 33, Y: 34, Z: 35
     }
-    let check = codigo_IBAN.substring(0, 4);
-    let check_nums = "";
-    console.log(check);
+    let check_num = "";
+    let check_num_og;
+    let end = "";
+    let iban_9 = [];
+    let count_nine = 1;
+    let count_mod = 0;
+    let mod = 0;
+    let mod_final = 0;
 
-    for (let i = 0; i < check.length; i++) {
-        if (isNaN(check[i])) {
-            check_nums += letter_num[check[i]];
+    for (let i = 0; i < codigo_IBAN.length; i++) {
+        if (isNaN(codigo_IBAN[i])) {
+            end += letter_num[codigo_IBAN[i]].toString();
+            codigo_IBAN.length + 2;
         } else {
-            check_nums += check[i];
+            if (i < 4)
+                end += [codigo_IBAN[i]];
+            else
+                check_num += codigo_IBAN[i];
         }
     }
-    console.log(check_nums);
-    // dividir número obtenido
-    if (parseInt(check_nums % 97 == 1))
-        return true;
-    else
-        return false;
+    check_num += end;
+    check_num_og = check_num;
+
+    while (check_num.length - 9 > 9) {
+        check_num = check_num.substring(0, check_num.length - 9);
+        count_nine++;
+    }
+
+    for (let i = 0; i < count_nine; i++) {
+        iban_9[i] = "";
+        for (let j = 0; j < 9; j++) {
+            if (i == 0)
+                iban_9[i] += check_num_og[j];
+            else
+                iban_9[i] += check_num_og[j + 9 * i];
+        }
+    }
+
+    if (check_num % 97 > 1) {
+        while (mod % 97 > 1 && count_mod < iban_9.length || mod == 0 && count_mod < iban_9.length) {
+            let mod_front = 0;
+            // console.log("og  " + check_num_og);
+            // console.log("mod  " + mod);
+            // console.log("nueve  " + iban_9[count_mod]);
+            mod = mod_front.toString() + iban_9[count_mod].toString();
+            // console.log("dividir  " + mod);
+            mod_front = parseInt((iban_9[count_mod] % 97)).toString();
+            mod_final += mod_front;
+            count_mod++;
+        }
+        if (parseInt(mod_final) % 97 == 1)
+            return true;
+        else
+            return false;
+    }
 }
-console.log(comprobar_IBAN("ES4600781315928140332685"))
+
+console.log(comprobar_IBAN("ES6621000418401234567891"));
