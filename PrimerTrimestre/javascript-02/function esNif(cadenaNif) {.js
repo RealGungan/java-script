@@ -1,30 +1,24 @@
 function esNif(cadenaNif) {
 
     cadenaNif = cadenaNif.toUpperCase().trim();
-    let numeros = "123456789";
-    let letra = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 
     if (cadenaNif.length != 9) {
-        console.log("el nif debe contener 8 numeros y una letra");
+        console.log("Se ha introducido un dato no válido. No es NIF ni un DNI");
         return 0;
 
     }
 
-
-
     if (cadenaNif.substr(-1) < "A" || !cadenaNif.substr(-1) > "Z") {
-        console.log("la última posicion debe ser una letra");
+        console.log("Se ha introducido un dato no válido. No es NIF ni un DNI");
         return 0;
     }
 
     if (!cadenaNif.charAt(0) == 'X' && !cadenaNif.charAt(0) == 'Y' && !cadenaNif.charAt(0) == 'Z'
         || !cadenaNif.charAt(0) == 'L' && !cadenaNif.charAt(0) == 'K' && !cadenaNif.charAt(0) == 'M' && isNaN(cadenaNif.charAt(0))) {
-        console.log("-----");
+        console.log(" Se ha introducido un dato no válido. No es NIF ni un DNI");
         return 0;
 
     }
-
 
     calculoCaracterControl = cadenaNif.substr(0, 8);
     let cambio = "";
@@ -51,13 +45,14 @@ function esNif(cadenaNif) {
     console.log(posicion);
 
     if (cadenaNif.substr(-1) != arr[posicion]) {
-        console.log("el nif no es correcto");
-        return 0;
+        console.log("el nif no es correcto, el caracter de control es erroneo");
+        return 2;
 
-    } 
+    }
 
     if (!cambio >= 100000) {
-        return 0;
+        console.log("Se ha introducido un DNI, se ha pasado un número de entre 6 y 8 dígitos con un valor mínimo de 100000.");
+        return 3;
     }
     console.log("el nif es correcto");
     return 1;
