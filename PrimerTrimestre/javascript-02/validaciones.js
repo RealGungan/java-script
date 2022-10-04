@@ -157,32 +157,35 @@ function nif_Cif(cadenaNifcif) {
     let formatocif="ABCDEFGHJUVPQRSW";
  
     if (cadenaNifcif.length != 9) {
-       console.log("Se ha introducido un dato no válido. No es CIF");
-       return 0;
-    }else{
-          if(formatocif.includes(cadenaNifcif[0])){
-                esCif(cadenaNifcif);
-                if (esCif(cadenaNifcif)==1){
-                    console.log("CIF correcto");
-                    return c1;
-                }else if(esCif(cadenaNifcif)==2){
-                    console.log("Se ha introducido un cif erróneo. El carácter de control es erróneo");
-                    return c2;
-                }
-          }else{
-                esNif(cadenaNifcif);
-                if(esNif(cadenaNifcif)==1){
-                    console.log("Se ha ntroducido un NIF correcto");
-                    return n1;
-                }else if(esNif(cadenaNifcif)==2){
-                    console.log("Se ha introducido un NIF erróneo. E l carácter de control es erróneo");
-                    return n2;
-                }else if(esNif(cadenaNifcif)==3){
-                    console.log("Se ha introducido un DNI, se ha pasado un número de entre 6 y 8 dígitos con un valor mínimo de 100000");
-                    return n3;
-                }
-          }
-    }
+        let res0=("Se ha introducido un dato no válido. No es CIF");
+        return res0;
+     }else{
+           if(formatocif.includes(cadenaNifcif[0])){
+                 esCif(cadenaNifcif);
+                 if (esCif(cadenaNifcif)==1){
+                     let c1=("CIF correcto")
+                     return c1;
+                 }else if(esCif(cadenaNifcif)==2){
+                     let c2=("Se ha introducido un cif erróneo. El carácter de control es erróneo");
+                     return c2;
+                 }
+           }else{
+                 esNif(cadenaNifcif);
+                 if(esNif(cadenaNifcif)==1){  
+                     let n1=("Se ha introducido un NIF correcto");
+                     return n1;
+                 }else if(esNif(cadenaNifcif)==2){
+                     let n2=("Se ha introducido un NIF erróneo. El carácter de control es erróneo");
+                     return n2;
+                 }else if(esNif(cadenaNifcif)==3){
+                     let n3=("Se ha introducido un DNI, se ha pasado un número de entre 6 y 8 dígitos con un valor mínimo de 100000");
+                     return n3;
+                 }
+           }
+     }
+   
+          
+    
 }
 //-------------------------------ejercicio 5  de condigo control 
 
