@@ -152,8 +152,18 @@ function esCif(cadenaCif) {
 //ejercicio 4  ----- para este ejercicio nos falta el ejercicio de nif
 //console.log(esCif("q7850003J"));
 function nif_Cif(parametro) {
-    return respuesta;
 
+    let formatocif="ABCDEFGHJUVPQRSW";
+ 
+    if (parametro.length != 9) {
+       return 0; //se  ha introducido un dato no válido. No es CIF
+    }else{
+          if(formatocif.includes(parametro[0])){
+             esCif(parametro);
+          }else{
+             esNif(parametro);  
+          }
+    }
 }
 //-------------------------------ejercicio 5  de condigo control 
 
