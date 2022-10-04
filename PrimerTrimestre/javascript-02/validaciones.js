@@ -58,7 +58,7 @@ function esNif(cadenaNif) {
     console.log("el nif es correcto");
     return 1;
 }
-console.log(esNif("Y2345678Z"));
+console.log(esNif("53909901X"));
 
 
 //funcion es cif ej 3
