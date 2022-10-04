@@ -159,8 +159,8 @@ function comprobar_IBAN(codigo_IBAN) {
     console.log(check);
 
     for (let i = 0; i < check.length; i++) {
-        if (isNaN.check[i])
-            check_nums += letter_num[comprobar_IBAN[i]];
+        if (isNaN(check[i]))
+            check_nums += letter_num[check_nums[i]];
         else
             check_nums += check[i];
     }
