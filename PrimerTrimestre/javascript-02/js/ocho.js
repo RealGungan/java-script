@@ -1,6 +1,5 @@
 
 
-
 function validarFormulario() {
 
     let mensaje = "";
@@ -79,16 +78,41 @@ function validarDirec() {
     let direccion = document.formulario.direccion.value;
     let direcc = direccion.toLowerCase().trim();
     let valido = true;
-    let caracteres = "ºª-/.";
-    if (direcc.charAt(0) < "a" || direcc.charAt(0) > "z") {
-        valido = false;
-    }
-    let ultimo = direcc.charAt(direcc.length - 1);
-    console.log(ultimo);
-    if (caracteres.includes(ultimo)) {
+    let caracteres = "ºª-/. ";
+    let enmedio = direcc.substr(1,direcc.length-1);
+    if ((direcc.charAt(0) < "a" || direcc.charAt(0) > "z")&& !caracteres.includes(enmedio)) {
         valido = false;
     }
 
     return valido;
 
+}
+//console.log(validarDirec("alle44"));
+
+function validLocalidad(){
+    let local= document.formulario.codigo.value;
+    let localidad=local.toLowerCase().trim();
+    let valido = true;
+    let resto=localidad.substr(1,localidad.length-1);
+    let caracter="áéíóúüñ  ";
+    if((localidad.charAt(0)< "a" || localidad.charAt(0) > "z" || localidad.charAt(localidad.length-1)< "a" || localidad.charAt(localidad.length-1) > "z" )&& !caracter.includes(localidad.charAt(localidad.length-1))){
+        valido = false;
+    }
+    for(let i=0;i<resto.length ;i++){
+        if((resto.charAt(i)< "a" || resto.charAt(i) > "z") && !caracter.includes(resto.charAt(i))){
+            valido = false;
+        }
+    }
+    return valido;
+}
+//console.log(validLocalidad("comunidad4 d6 madrid"));
+
+function validCodPos(){
+    let valido = true;
+    let codPos= document.formulario.codigo_postal.value;
+    let cp = parseInt(codPos);
+    if(cp < 1000 || cp > 52999 ){
+        valido = false;
+    }
+    return valido;
 }
