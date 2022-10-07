@@ -154,36 +154,36 @@ function esCif(cadenaCif) {
 function nif_Cif(cadenaNifcif) {
 
     cadenaNifcif = cadenaNifcif.toUpperCase().trim();
-    let formatocif="ABCDEFGHJUVPQRSW";
- 
+    let formatocif = "ABCDEFGHJUVPQRSW";
+
     if (cadenaNifcif.length != 9) {
-        let res0=("Se ha introducido un dato no válido. No es CIF");
+        let res0 = ("Se ha introducido un dato no válido. No es CIF");
         return res0;
-     }else{
-           if(formatocif.includes(cadenaNifcif[0])){
-                 esCif(cadenaNifcif);
-                 if (esCif(cadenaNifcif)==1){
-                     let c1=("CIF correcto")
-                     return c1;
-                 }else if(esCif(cadenaNifcif)==2){
-                     let c2=("Se ha introducido un cif erróneo. El carácter de control es erróneo");
-                     return c2;
-                 }
-           }else{
-                 esNif(cadenaNifcif);
-                 if(esNif(cadenaNifcif)==1){  
-                     let n1=("Se ha introducido un NIF correcto");
-                     return n1;
-                 }else if(esNif(cadenaNifcif)==2){
-                     let n2=("Se ha introducido un NIF erróneo. El carácter de control es erróneo");
-                     return n2;
-                 }else if(esNif(cadenaNifcif)==3){
-                     let n3=("Se ha introducido un DNI, se ha pasado un número de entre 6 y 8 dígitos con un valor mínimo de 100000");
-                     return n3;
-                 }
-           }
-     }
-    
+    } else {
+        if (formatocif.includes(cadenaNifcif[0])) {
+            esCif(cadenaNifcif);
+            if (esCif(cadenaNifcif) == 1) {
+                let c1 = ("CIF correcto")
+                return c1;
+            } else if (esCif(cadenaNifcif) == 2) {
+                let c2 = ("Se ha introducido un cif erróneo. El carácter de control es erróneo");
+                return c2;
+            }
+        } else {
+            esNif(cadenaNifcif);
+            if (esNif(cadenaNifcif) == 1) {
+                let n1 = ("Se ha introducido un NIF correcto");
+                return n1;
+            } else if (esNif(cadenaNifcif) == 2) {
+                let n2 = ("Se ha introducido un NIF erróneo. El carácter de control es erróneo");
+                return n2;
+            } else if (esNif(cadenaNifcif) == 3) {
+                let n3 = ("Se ha introducido un DNI, se ha pasado un número de entre 6 y 8 dígitos con un valor mínimo de 100000");
+                return n3;
+            }
+        }
+    }
+
 }
 //-------------------------------ejercicio 5  de condigo control 
 
@@ -255,6 +255,7 @@ function comprobar_IBAN(codigo_IBAN) {
     let mod = 0;
     let mod_final = 0;
 
+    // generar el código IBAN cambiándo las letras
     for (let i = 0; i < codigo_IBAN.length; i++) {
         if (isNaN(codigo_IBAN[i])) {
             end += letter_num[codigo_IBAN[i]].toString();
@@ -266,14 +267,19 @@ function comprobar_IBAN(codigo_IBAN) {
                 check_num += codigo_IBAN[i];
         }
     }
+
+    // colocar los cuatro primeros dígitos al final
     check_num += end;
+    // variable para luego partir el string en trozos de 9
     check_num_og = check_num;
 
+    // comprobar cuantas veces se puede dividir el string en 9
     while (check_num.length - 9 > 9) {
         check_num = check_num.substring(0, check_num.length - 9);
         count_nine++;
     }
 
+    // crear un array en el que cada posición sea un trozo de 9 
     for (let i = 0; i < count_nine; i++) {
         iban_9[i] = "";
         for (let j = 0; j < 9; j++) {
@@ -284,6 +290,7 @@ function comprobar_IBAN(codigo_IBAN) {
         }
     }
 
+    // realizar las comprobaciones 
     if (check_num % 97 > 1) {
         while (mod % 97 > 1 && count_mod < iban_9.length || mod == 0 && count_mod < iban_9.length) {
             let mod_front = 0;
