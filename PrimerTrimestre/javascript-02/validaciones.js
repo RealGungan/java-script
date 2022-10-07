@@ -247,19 +247,19 @@ function comprobar_IBAN(codigo_IBAN) {
         A: 10, B: 11, C: 12, D: 13, E: 14, F: 15, G: 16, H: 17, I: 18, J: 19, K: 20, L: 21, M: 22, N: 23, O: 24, P: 25, Q: 26, R: 27, S: 28, T: 29, U: 30, V: 31, W: 32, X: 33, Y: 34, Z: 35
     }
     let check_num = "";
-    let check_num_og;
-    let end = "";
-    let iban_9 = [];
-    let count_nine = 1;
-    let count_mod = 0;
+    let check_stack = "";
     let mod = 0;
-    let mod_final = 0;
 
-    // generar el código IBAN cambiándo las letras
+    let end = "";
     for (let i = 0; i < codigo_IBAN.length; i++) {
         if (isNaN(codigo_IBAN[i])) {
-            end += letter_num[codigo_IBAN[i]].toString();
-            codigo_IBAN.length + 2;
+            if (i < 4)
+                end += letter_num[codigo_IBAN[i]].toString();
+            else
+                if (isNaN(codigo_IBAN[i])) {
+                    codigo_IBAN.length + 2;
+                    check_num += letter_num[codigo_IBAN[i]].toString();
+                }
         } else {
             if (i < 4)
                 end += [codigo_IBAN[i]];
@@ -273,41 +273,19 @@ function comprobar_IBAN(codigo_IBAN) {
     // variable para luego partir el string en trozos de 9
     check_num_og = check_num;
 
-    // comprobar cuantas veces se puede dividir el string en 9
-    while (check_num.length - 9 > 9) {
-        check_num = check_num.substring(0, check_num.length - 9);
-        count_nine++;
-    }
+    do {
+        check_stack = mod.toString() + check_num.substring(0, 9 - mod.toString().length);
+        check_num = check_num.substring(check_stack.length - mod.toString().length);
 
-    // crear un array en el que cada posición sea un trozo de 9 
-    for (let i = 0; i < count_nine; i++) {
-        iban_9[i] = "";
-        for (let j = 0; j < 9; j++) {
-            if (i == 0)
-                iban_9[i] += check_num_og[j];
-            else
-                iban_9[i] += check_num_og[j + 9 * i];
-        }
-    }
+        mod = check_stack % 97;
+        console.log(check_stack);
 
-    // realizar las comprobaciones 
-    if (check_num % 97 > 1) {
-        while (mod % 97 > 1 && count_mod < iban_9.length || mod == 0 && count_mod < iban_9.length) {
-            let mod_front = 0;
-            // console.log("og  " + check_num_og);
-            // console.log("mod  " + mod);
-            // console.log("nueve  " + iban_9[count_mod]);
-            mod = mod_front.toString() + iban_9[count_mod].toString();
-            // console.log("dividir  " + mod);
-            mod_front = parseInt((iban_9[count_mod] % 97)).toString();
-            mod_final += mod_front;
-            count_mod++;
-        }
-        if (parseInt(mod_final) % 97 == 1)
+        if (mod == 1)
             return true;
-        else
-            return false;
-    }
+    } while (check_num != "");
+
+    return false;
+
 }
 
-console.log(comprobar_IBAN("ES6621000418401234567891"));
+console.log(comprobar_IBAN("IE29AIBK93115212345678"));
