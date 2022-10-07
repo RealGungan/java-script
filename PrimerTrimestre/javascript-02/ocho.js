@@ -1,6 +1,5 @@
 
 
-
 function validarFormulario() {
 
     let mensaje = "";
@@ -11,7 +10,7 @@ function validarFormulario() {
         alert(mensaje);
         enviar = false;
     }
-    
+
     return enviar;
 
 }

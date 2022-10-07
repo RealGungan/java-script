@@ -278,7 +278,6 @@ function comprobar_IBAN(codigo_IBAN) {
         check_num = check_num.substring(check_stack.length - mod.toString().length);
 
         mod = check_stack % 97;
-        console.log(check_stack);
 
         if (mod == 1)
             return true;
@@ -287,5 +286,3 @@ function comprobar_IBAN(codigo_IBAN) {
     return false;
 
 }
-
-console.log(comprobar_IBAN("IE29AIBK93115212345678"));

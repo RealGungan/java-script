@@ -26,7 +26,7 @@
         <h2> Formulario de recogida de datos de las empresas</h2>
     </header>
     <main>
-        <form action="" method="POST" class="formulario">
+        <form action="" method="POST" class="formulario" name="formulario" onsubmit="return danichupapija();">
 
             <div class="cajas">
                 <label for="razón">Razón Social/Apellidos y Nombre</label>
@@ -204,7 +204,7 @@
                 </fieldset>
             </div>
             <div class="cajas">
-                <input type="button" name="Validar" value="Validar"></input>
+                <input type="submit" name="Validar" value="Validar"></input>
                 <input type="button" name="Limpiar" value="Limpiar"></input>
             </div>
         </form>
