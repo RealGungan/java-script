@@ -194,7 +194,7 @@ function codigosControl(banco, sucursal, cuenta) {
         return -1;
     }
     let sumaBanco = parseInt(banco[0]) * 4 + parseInt(banco[1]) * 8 + parseInt(banco[2]) * 5 + parseInt(banco[3]) * 10;
-    let sumaSucursal = parseInt(banco[0]) * 9 + parseInt(banco[1]) * 7 + parseInt(banco[2]) * 3 + parseInt(banco[3]) * 6;
+    let sumaSucursal = parseInt(sucursal[0]) * 9 + parseInt(sucursal[1]) * 7 + parseInt(sucursal[2]) * 3 + parseInt(sucursal[3]) * 6;
     let resultado = 11 - (sumaBanco + sumaSucursal) % 11;
     // console.log(sumaBanco + " " + sumaSucursal + " " + resultado);
     if (resultado == 10) {
@@ -213,8 +213,7 @@ function codigosControl(banco, sucursal, cuenta) {
     //truco: si es numero y quiero que al imprimir sea String puedo  poner " " y concatenar con + y asi no se suma 
     return "" + resultado + numero3;
 }
-// para probar la funcion . en esta funcion no me funciona el primer digito, el segundo su lo coge
-// ver por que no cambia en resultado y siempre sale 1 y en numero3 si
+
 // console.log(codigosControl("0186", "8018", "6078591188"));
 // 64
 // 31838056761780852105
