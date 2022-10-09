@@ -6,6 +6,10 @@ function validarFormulario() {
     let enviar = true;
     mensaje += validarRazon();
     mensaje += validarDni_Cif();
+    mensaje += validarCodEmp();
+    mensaje += validarDirec();
+    mensaje += validLocalidad();
+    mensaje += validCodPos();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -27,17 +31,21 @@ function validarDni_Cif() {
 }
 
 function validarCodEmp() {
+    let cadena_errores = "";
     let codigo_empresa = document.formulario.codigo_empresa.value;
     let codigo_emp = codigo_empresa.toLowerCase().trim();
-    let valido = true;
+    //let valido = true;
     if (codigo_emp.length < 5 || codigo_emp.length > 10) {
         //document.getElementById("codigo_empresa").style.borderColor = "red";
-        valido = false;
+        //valido = false;
+        cadena_errores += "Error la longitud no es correcta \n";
     }
-    if (codigo_emp.charAt(0) < "a" || codigo_emp.charAt(0) > "z") {
-        valido = false;
-    }
-    return valido;
+    // if (codigo_emp.charAt(0) < "a" || codigo_emp.charAt(0) > "z") {
+    //     //valido = false;
+    //     cadena_errores += "Error el primer caracter debe de ser letra \n";
+    // }
+    //return valido;
+    return cadena_errores;
 }
 
 function validarRazon() {
@@ -75,44 +83,52 @@ function validarRazon() {
 }
 
 function validarDirec() {
+    let cadena_errores = "";
     let direccion = document.formulario.direccion.value;
     let direcc = direccion.toLowerCase().trim();
-    let valido = true;
+    //let valido = true;
     let caracteres = "ºª-/. ";
     let enmedio = direcc.substr(1,direcc.length-1);
     if ((direcc.charAt(0) < "a" || direcc.charAt(0) > "z")&& !caracteres.includes(enmedio)) {
-        valido = false;
+        //valido = false;
+        cadena_errores += "Error el primer caracter debe de ser una letra \n";
     }
-
-    return valido;
+    //return valido;
+    return cadena_errores;
 
 }
 //console.log(validarDirec("alle44"));
 
 function validLocalidad(){
+    let cadena_errores = "";
     let local= document.formulario.codigo.value;
     let localidad=local.toLowerCase().trim();
-    let valido = true;
+    //let valido = true;
     let resto=localidad.substr(1,localidad.length-1);
     let caracter="áéíóúüñ  ";
     if((localidad.charAt(0)< "a" || localidad.charAt(0) > "z" || localidad.charAt(localidad.length-1)< "a" || localidad.charAt(localidad.length-1) > "z" )&& !caracter.includes(localidad.charAt(localidad.length-1))){
-        valido = false;
+        //valido = false;
+        cadena_errores += "Error el primer  y ultimo caracter debe de ser una letra \n";
     }
     for(let i=0;i<resto.length ;i++){
         if((resto.charAt(i)< "a" || resto.charAt(i) > "z") && !caracter.includes(resto.charAt(i))){
-            valido = false;
+            cadena_errores += "Error los caracteres deben de ser letras, se permite espacios\n";
         }
     }
-    return valido;
+    //return valido;
+    return cadena_errores;
 }
 //console.log(validLocalidad("comunidad4 d6 madrid"));
 
 function validCodPos(){
-    let valido = true;
+    //let valido = true;
+    let cadena_errores = "";
     let codPos= document.formulario.codigo_postal.value;
     let cp = parseInt(codPos);
     if(cp < 1000 || cp > 52999 ){
-        valido = false;
+        //valido = false;
+        cadena_errores += "El CP uede tener valores comprendidos entre 1000 y 52999\n";
     }
-    return valido;
+    //return valido;
+    return cadena_errores;
 }
