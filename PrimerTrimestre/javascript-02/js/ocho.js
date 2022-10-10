@@ -1,7 +1,7 @@
 window.onload = inicio;
 function inicio() {
     document.formulario.onsubmit = validarFormulario;
-    document.formulario.codigo_postal.onkeypress = cambioCodPos;
+    document.formulario.codigo_postal.oninput = cambioCodPos;
 
 
 }
@@ -147,12 +147,14 @@ function cambioCodPos() {
     let initial = parseInt(codigoPostal.substring(0, 2)) - 1;
 
 
-    let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Asturias', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Cáceres',
-        'Cádiz', 'Cantabria', 'Castellón', 'Ciudad Real', 'Córdoba', 'La Coruña', 'Cuenca', 'Gerona', 'Granada', 'Guadalajara',
-        'Guipúzcoa', 'Huelva', 'Huesca', 'Islas Baleares', 'Jaén', 'León', 'Lérida', 'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Navarra',
-        'Orense', 'Palencia', 'Las Palmas', 'Pontevedra', 'La Rioja', 'Salamanca', 'Segovia', 'Sevilla', 'Soria', 'Tarragona',
-        'Santa Cruz de Tenerife', 'Teruel', 'Toledo', 'Valencia', 'Valladolid', 'Vizcaya', 'Zamora', 'Zaragoza'];
+    let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Avila', 'Badajoz', 'Islas Baleares', 'Barcelona', 'Burgos', 'Cáceres',
+        'Cádiz', 'Castellón', 'Ciudad Real', 'Córdoba','La Coruña', 'Cuenca', 'Gerona', 'Granada', 'Guadalajara',
+        'Guipúzcoa', 'Huelva', 'Huesca', 'Jaén', 'León', 'Lérida', 'La Rioja', 'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Navarra',
+        'Orense', 'Asturias', 'Palencia', 'Las Palmas', 'Pontevedra', 'Salamanca', 'Santa Cruz de Tenerife', 'Cantabria', 'Segovia', 'Sevilla', 'Soria', 'Tarragona',
+        'Teruel', 'Toledo', 'Valencia', 'Valladolid', 'Vizcaya', 'Zamora', 'Zaragoza','Ceuta','Melilla'];
 
     document.formulario.provincia.value = provincias[initial];
+    
+    
 }
 
