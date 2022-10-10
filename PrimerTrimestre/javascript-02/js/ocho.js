@@ -5,9 +5,7 @@ function inicio() {
 
 
 }
-function hola() {
-    return false;
-}
+
 
 function validarFormulario() {
 
@@ -142,9 +140,10 @@ function validCodPos() {
     //return valido;
     return cadena_errores;
 }
+//el codigo postal entre 1000 etc etc --> donde se mete 
 function cambioCodPos() {
     let codigoPostal = document.formulario.codigo_postal.value;
-    let initial = parseInt(codigoPostal.substring(0, 2)) - 1;
+    let initial = parseInt(codigoPostal.substring(0, 2)-1);
 
 
     let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Avila', 'Badajoz', 'Islas Baleares', 'Barcelona', 'Burgos', 'Cáceres',
