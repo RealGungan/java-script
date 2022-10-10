@@ -1,7 +1,15 @@
-
+window.onload=inicio;
+function inicio(){
+    document.formulario.onsubmit=validarFormulario;
+    
+    
+}
+function hola(){
+    return false;
+}
 
 function validarFormulario() {
-
+    
     let mensaje = "";
     let enviar = true;
     mensaje += validarRazon();
@@ -14,7 +22,7 @@ function validarFormulario() {
         alert(mensaje);
         enviar = false;
     }
-
+ 
     return enviar;
 
 }
@@ -49,7 +57,7 @@ function validarCodEmp() {
 }
 
 function validarRazon() {
-    debugger;
+
 
     let cadena_errores = "";
     let razon = document.formulario.razon.value.toUpperCase();
@@ -132,3 +140,4 @@ function validCodPos(){
     //return valido;
     return cadena_errores;
 }
+
