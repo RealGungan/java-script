@@ -1,17 +1,19 @@
-window.onload=inicio;
-function inicio(){
-    document.formulario.onsubmit=validarFormulario;
-    
-    
+window.onload = inicio;
+function inicio() {
+    document.formulario.onsubmit = validarFormulario;
+    document.formulario.codigo_postal.onkeypress = cambioCodPos;
+
+
 }
-function hola(){
+function hola() {
     return false;
 }
 
 function validarFormulario() {
-    
+
     let mensaje = "";
     let enviar = true;
+
     mensaje += validarRazon();
     mensaje += validarDni_Cif();
     mensaje += validarCodEmp();
@@ -22,7 +24,7 @@ function validarFormulario() {
         alert(mensaje);
         enviar = false;
     }
- 
+
     return enviar;
 
 }
@@ -96,8 +98,8 @@ function validarDirec() {
     let direcc = direccion.toLowerCase().trim();
     //let valido = true;
     let caracteres = "ºª-/. ";
-    let enmedio = direcc.substr(1,direcc.length-1);
-    if ((direcc.charAt(0) < "a" || direcc.charAt(0) > "z")&& !caracteres.includes(enmedio)) {
+    let enmedio = direcc.substr(1, direcc.length - 1);
+    if ((direcc.charAt(0) < "a" || direcc.charAt(0) > "z") && !caracteres.includes(enmedio)) {
         //valido = false;
         cadena_errores += "Error el primer caracter debe de ser una letra \n";
     }
@@ -107,19 +109,19 @@ function validarDirec() {
 }
 //console.log(validarDirec("alle44"));
 
-function validLocalidad(){
+function validLocalidad() {
     let cadena_errores = "";
-    let local= document.formulario.codigo.value;
-    let localidad=local.toLowerCase().trim();
+    let local = document.formulario.codigo.value;
+    let localidad = local.toLowerCase().trim();
     //let valido = true;
-    let resto=localidad.substr(1,localidad.length-1);
-    let caracter="áéíóúüñ  ";
-    if((localidad.charAt(0)< "a" || localidad.charAt(0) > "z" || localidad.charAt(localidad.length-1)< "a" || localidad.charAt(localidad.length-1) > "z" )&& !caracter.includes(localidad.charAt(localidad.length-1))){
+    let resto = localidad.substr(1, localidad.length - 1);
+    let caracter = "áéíóúüñ  ";
+    if ((localidad.charAt(0) < "a" || localidad.charAt(0) > "z" || localidad.charAt(localidad.length - 1) < "a" || localidad.charAt(localidad.length - 1) > "z") && !caracter.includes(localidad.charAt(localidad.length - 1))) {
         //valido = false;
         cadena_errores += "Error el primer  y ultimo caracter debe de ser una letra \n";
     }
-    for(let i=0;i<resto.length ;i++){
-        if((resto.charAt(i)< "a" || resto.charAt(i) > "z") && !caracter.includes(resto.charAt(i))){
+    for (let i = 0; i < resto.length; i++) {
+        if ((resto.charAt(i) < "a" || resto.charAt(i) > "z") && !caracter.includes(resto.charAt(i))) {
             cadena_errores += "Error los caracteres deben de ser letras, se permite espacios\n";
         }
     }
@@ -128,16 +130,29 @@ function validLocalidad(){
 }
 //console.log(validLocalidad("comunidad4 d6 madrid"));
 
-function validCodPos(){
+function validCodPos() {
     //let valido = true;
     let cadena_errores = "";
-    let codPos= document.formulario.codigo_postal.value;
+    let codPos = document.formulario.codigo_postal.value;
     let cp = parseInt(codPos);
-    if(cp < 1000 || cp > 52999 ){
+    if (cp < 1000 || cp > 52999) {
         //valido = false;
         cadena_errores += "El CP uede tener valores comprendidos entre 1000 y 52999\n";
     }
     //return valido;
     return cadena_errores;
+}
+function cambioCodPos() {
+    let codigoPostal = document.formulario.codigo_postal.value;
+    let initial = parseInt(codigoPostal.substring(0, 2)) - 1;
+
+
+    let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Asturias', 'Avila', 'Badajoz', 'Barcelona', 'Burgos', 'Cáceres',
+        'Cádiz', 'Cantabria', 'Castellón', 'Ciudad Real', 'Córdoba', 'La Coruña', 'Cuenca', 'Gerona', 'Granada', 'Guadalajara',
+        'Guipúzcoa', 'Huelva', 'Huesca', 'Islas Baleares', 'Jaén', 'León', 'Lérida', 'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Navarra',
+        'Orense', 'Palencia', 'Las Palmas', 'Pontevedra', 'La Rioja', 'Salamanca', 'Segovia', 'Sevilla', 'Soria', 'Tarragona',
+        'Santa Cruz de Tenerife', 'Teruel', 'Toledo', 'Valencia', 'Valladolid', 'Vizcaya', 'Zamora', 'Zaragoza'];
+
+    document.formulario.provincia.value = provincias[initial];
 }
 
