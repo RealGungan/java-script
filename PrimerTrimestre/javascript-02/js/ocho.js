@@ -194,6 +194,23 @@ function validarTelefono(){
     return cadena_errores;
  }
 
+ function validFecha(){
+    let cadena_errores = "";
+    let fecha=document.formulario.fechac.value;
+    var fechaf = fecha.split("/");
+    var day = fechaf[0];
+    var month = fechaf[1];
+    var year = fechaf[2];
+    if ((day.length == 2 || day.length == 1) && (month.length == 2 || month.length == 1) && (year.length == 4 || year.length == 2 )) {
+    return true;
+    }else{
+    cadena_errores +="Error,los días tienen que ser entre 1 o 2 numeros al igual que los meses, el año debe contener 2 o 4 números \n";
+    return cadena_errores;
+    }
+    }
+    
+    
+
  function botonSelect(){
     let cadena_errores="";
     let radio= document.formulario.radios.checked;
