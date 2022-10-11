@@ -18,6 +18,7 @@ function validarFormulario() {
     mensaje += validarDirec();
     mensaje += validLocalidad();
     mensaje += validCodPos();
+    mensaje += validarTelefono();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -158,3 +159,17 @@ function cambioCodPos() {
     
 }
 
+function validarTelefono(){
+    let cadena_errores = "";
+    let telefono = document.formulario.telefono.value;
+    if(telefono.length != 9 || telefono.charAt(0)!= "6"||telefono.charAt(0)!= "9"||telefono.charAt(0)!= "7"){
+        cadena_errores += "Error, el teléfono debe contener 9 números y debe empezar por 6,9 ó 7";
+
+    }
+    return cadena_errores;
+}
+
+ function numerosPositive(){
+
+    let
+ }
