@@ -17,7 +17,6 @@ function validarFormulario() {
     mensaje += validarCodEmp();
     mensaje += validarDirec();
     mensaje += validLocalidad();
-    mensaje += validCodPos();
     mensaje += validarTelefono();
     mensaje += numerosPositive(); //
     if (mensaje.length > 0) {
@@ -181,7 +180,7 @@ function validarTelefono(){
 
  function numerosPositive(){
     let cadena_errores = "";
-    let camposPositivos =[document.formulario.telefono.value, document.formulario.codigoPostal.value];
+    let camposPositivos =[document.formulario.telefono.value, document.formulario.codigo_postal.value];
 
     for(let i=0; i < camposPositivos.length; i++){
         if(parseInt(camposPositivos[i]) < 0 ){
@@ -191,3 +190,5 @@ function validarTelefono(){
     }
     return cadena_errores;
  }
+
+
