@@ -21,6 +21,7 @@ function validarFormulario() {
     mensaje += validarTelefono();
     mensaje += numerosPositive();
     mensaje += botonSelect(); 
+    mensaje  += validarOpction();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -202,3 +203,21 @@ function botonSelect(){
 }
 /*El código del banco, el código de la oficina han de ser números y con cuatro
 dígitos. */
+
+function validarOpction(){
+    contador=0;
+    let cadena_errores="";
+    let comunidades= document.formulario.comunidades.options;
+    // console.log(comunidades[0].text);
+    
+    for (let i=0; i<comunidades.length; i++) {
+         if (comunidades[i].selected){
+            contador++;
+         }
+    }
+    if(contador < 2 ){
+        cadena_errores += "Error, debe seleccionar al menos dos comunidades";
+    }
+
+    return cadena_errores;
+}
