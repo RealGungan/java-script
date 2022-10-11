@@ -286,4 +286,5 @@ function comprobar_IBAN(codigo_IBAN) {
 
     return false;
 }
+console.log( comprobar_IBAN("ES1000492352082414205416"));
 
