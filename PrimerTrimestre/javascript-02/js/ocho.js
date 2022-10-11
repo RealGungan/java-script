@@ -241,3 +241,16 @@ function validarOpction(){
 
     return cadena_errores;
 }
+/*El código de control debe ser numérico con dos dígitos y debe ser correcto,
+para ello usaremos la función que acabamos de crear. */
+function validCodControl(){
+   let cadena_errores="";
+    let banco = document.formulario.codigo_banco;
+    let oficina = document.formulario.codigo_oficina;
+    let cuenta = document.formulario.numero_cuenta;
+    let codigoForm= document.formulario.codigo_control;
+   if(codigoForm != codigosControl(banco,oficina,cuenta)){
+    return cadena_errores+= "El codigo de control no es correcto";
+   }
+
+}
