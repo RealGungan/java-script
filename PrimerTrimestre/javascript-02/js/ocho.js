@@ -4,6 +4,7 @@ function inicio() {
     document.formulario.codigo_postal.oninput = cambioCodPos;
 
 
+
 }
 
 
@@ -19,7 +20,8 @@ function validarFormulario() {
     mensaje += validLocalidad();
     mensaje += validCodPos();
     mensaje += validarTelefono();
-    mensaje += numerosPositive(); //
+    mensaje += numerosPositive();
+    mensaje += botonSelect(); 
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -166,7 +168,6 @@ function cambioCodPos() {
     }
 
 
-
 }
 
 function validarTelefono(){
@@ -181,7 +182,7 @@ function validarTelefono(){
 
  function numerosPositive(){
     let cadena_errores = "";
-    let camposPositivos =[document.formulario.telefono.value, document.formulario.codigoPostal.value];
+    let camposPositivos =[document.formulario.telefono.value, document.formulario.codigo_postal.value];
 
     for(let i=0; i < camposPositivos.length; i++){
         if(parseInt(camposPositivos[i]) < 0 ){
@@ -191,10 +192,14 @@ function validarTelefono(){
     }
     return cadena_errores;
  }
- /*La Fecha puede tener uno ó dos dígitos para el mes y día y para el año va a
-poder tener dos o cuatro dígitos. */
 
- function validFecha(){
-    
-
- }
+function botonSelect(){
+    let cadena_errores="";
+    let radio= document.formulario.radios.checked;
+    if(!radio){
+         cadena_errores +="Es obligatorio elegir una opción";
+    }
+    return cadena_errores;
+}
+/*El código del banco, el código de la oficina han de ser números y con cuatro
+dígitos. */
