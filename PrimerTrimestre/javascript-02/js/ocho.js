@@ -173,7 +173,7 @@ function validarTelefono(){
     let cadena_errores = "";
     let telefono = document.formulario.telefono.value;
     if(telefono.length != 9 || telefono.charAt(0)!= "6"||telefono.charAt(0)!= "9"||telefono.charAt(0)!= "7"){
-        cadena_errores += "Error, el teléfono debe contener 9 números y debe empezar por 6,9 ó 7";
+        cadena_errores += "Error, el teléfono debe contener 9 números y debe empezar por 6,9 ó 7 \n";
 
     }
     return cadena_errores;
@@ -185,7 +185,7 @@ function validarTelefono(){
 
     for(let i=0; i < camposPositivos.length; i++){
         if(parseInt(camposPositivos[i]) < 0 ){
-            cadena_errores += "Error,no se pueden introducir números negativos";
+            cadena_errores += "Error,no se pueden introducir números negativos \n";
         }
 
     }
@@ -196,7 +196,7 @@ function botonSelect(){
     let cadena_errores="";
     let radio= document.formulario.radios.checked;
     if(!radio){
-         cadena_errores +="Es obligatorio elegir una opción";
+         cadena_errores +="Es obligatorio elegir una opción\n";
     }
     return cadena_errores;
 }
