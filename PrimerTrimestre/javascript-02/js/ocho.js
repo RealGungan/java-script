@@ -192,11 +192,20 @@ function validarTelefono(){
     return cadena_errores;
  }
 
-function botonSelect(){
+ function botonSelect(){
     let cadena_errores="";
     let radio= document.formulario.radios.checked;
+    let sector = document.formulario.sector.checked;
+    let tipo = document.formulario.tipo.checked;
     if(!radio){
-         cadena_errores +="Es obligatorio elegir una opción\n";
+         cadena_errores +="Es obligatorio elegir una opción en personal ";
+    }
+    if(!sector){
+        cadena_errores +="Es obligatorio elegir una opción de sector económico ";
+    }
+    if(!tipo){
+        cadena_errores +="Es obligatorio elegir una opción de tipo de empresa ";
+
     }
     return cadena_errores;
 }
