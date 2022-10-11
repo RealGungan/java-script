@@ -19,6 +19,7 @@ function validarFormulario() {
     mensaje += validLocalidad();
     mensaje += validarTelefono();
     mensaje += numerosPositive(); //
+    mensaje += validFecha();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
