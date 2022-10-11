@@ -20,6 +20,7 @@ function validarFormulario() {
     mensaje += validLocalidad();
     mensaje += validarTelefono();
     mensaje += numerosPositive();
+    mensaje += validFecha();
     mensaje += botonSelect(); 
     mensaje += validarOpction();
     mensaje += validarNumeroCuenta();
