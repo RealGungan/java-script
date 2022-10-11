@@ -182,3 +182,10 @@ function validarTelefono(){
 
     let
  }
+ /*La Fecha puede tener uno ó dos dígitos para el mes y día y para el año va a
+poder tener dos o cuatro dígitos. */
+
+ function validFecha(){
+    
+
+ }
