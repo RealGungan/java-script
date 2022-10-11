@@ -19,6 +19,7 @@ function validarFormulario() {
     mensaje += validLocalidad();
     mensaje += validCodPos();
     mensaje += validarTelefono();
+    mensaje += numerosPositive(); //
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -179,8 +180,16 @@ function validarTelefono(){
 }
 
  function numerosPositive(){
+    let cadena_errores = "";
+    let camposPositivos =[document.formulario.telefono.value, document.formulario.codigoPostal.value];
 
-    let
+    for(let i=0; i < camposPositivos.length; i++){
+        if(parseInt(camposPositivos[i]) < 0 ){
+            cadena_errores += "Error,no se pueden introducir números negativos";
+        }
+
+    }
+    return cadena_errores;
  }
  /*La Fecha puede tener uno ó dos dígitos para el mes y día y para el año va a
 poder tener dos o cuatro dígitos. */
