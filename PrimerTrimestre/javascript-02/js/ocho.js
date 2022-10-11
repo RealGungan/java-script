@@ -21,6 +21,8 @@ function validarFormulario() {
     mensaje += validarTelefono();
     mensaje += numerosPositive();
     mensaje += botonSelect(); 
+    mensaje += validarOpction();
+    mensaje += validarNumeroCuenta();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -198,13 +200,13 @@ function validarTelefono(){
     let sector = document.formulario.sector.checked;
     let tipo = document.formulario.tipo.checked;
     if(!radio){
-         cadena_errores +="Es obligatorio elegir una opción en personal ";
+         cadena_errores +="Es obligatorio elegir una opción en personal\n ";
     }
     if(!sector){
-        cadena_errores +="Es obligatorio elegir una opción de sector económico ";
+        cadena_errores +="Es obligatorio elegir una opción de sector económico\n ";
     }
     if(!tipo){
-        cadena_errores +="Es obligatorio elegir una opción de tipo de empresa ";
+        cadena_errores +="Es obligatorio elegir una opción de tipo de empresa\n ";
 
     }
     return cadena_errores;
@@ -216,10 +218,10 @@ function controlCodBanco(){
     let banco = document.formulario.codigo_banco;
     let oficina = document.formulario.codigo_oficina;
     if(parseInt(banco)!=4 ){
-        cadena_errores+= "El banco debe de ser de 4 dígitos ";
+        cadena_errores+= "El banco debe de ser de 4 dígitos\n ";
     }
     if(parseInt(oficina)!=4){
-        cadena_errores+= "La oficina debe de ser de 4 dígitos ";
+        cadena_errores+= "La oficina debe de ser de 4 dígitos\n ";
     }
     return cadena_errores;
 }
@@ -236,9 +238,18 @@ function validarOpction(){
          }
     }
     if(contador < 2 ){
-        cadena_errores += "Error, debe seleccionar al menos dos comunidades";
+        cadena_errores += "Error, debe seleccionar al menos dos comunidades \n";
     }
+    console.log(contador);
+    return cadena_errores;
+}
 
+function validarNumeroCuenta(){
+    let cadena_errores="";
+    let numeroCuenta=document.formulario.numero_cuenta.value;
+     if(numeroCuenta.length !=10 || isNaN(numeroCuenta)){
+        cadena_errores += "Error, el número de cuenta debe tener 10 números y no contener ningún carácter no numérico \n";
+    }
     return cadena_errores;
 }
 /*El código de control debe ser numérico con dos dígitos y debe ser correcto,
