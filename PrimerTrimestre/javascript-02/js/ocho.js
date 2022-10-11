@@ -21,6 +21,7 @@ function validarFormulario() {
     mensaje += validarTelefono();
     mensaje += numerosPositive();
     mensaje += botonSelect(); 
+    mensaje+=controlCodBanco();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -211,3 +212,15 @@ function validarTelefono(){
 }
 /*El código del banco, el código de la oficina han de ser números y con cuatro
 dígitos. */
+function controlCodBanco(){
+    let cadena_errores = "";
+    let banco = document.formulario.codigo_banco;
+    let oficina = document.formulario.codigo_oficina;
+    if(parseInt(banco)!=4 ){
+        cadena_errores+= "El banco debe de ser de 4 dígitos ";
+    }
+    if(parseInt(oficina)!=4){
+        cadena_errores+= "La oficina debe de ser de 4 dígitos ";
+    }
+    return cadena_errores;
+}
