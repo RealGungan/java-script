@@ -18,7 +18,6 @@ function validarFormulario() {
     mensaje += validarCodEmp();
     mensaje += validarDirec();
     mensaje += validLocalidad();
-    mensaje += validCodPos();
     mensaje += validarTelefono();
     mensaje += numerosPositive();
     mensaje += botonSelect(); 
