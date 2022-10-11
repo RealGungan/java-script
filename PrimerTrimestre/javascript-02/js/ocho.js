@@ -202,7 +202,7 @@ poder tener dos o cuatro dígitos. */
       if ((fecha.match(RegExPattern)) && (fecha!='')) {
             return true;
       } else {
-            cadena_errores+="Error, el año debe contener mínimo dos números y máximo 4"
+            cadena_errores+="Error,los días tienen que ser entre 1 o 2 numeros al igual que los meses, el año debe contener mínimo dos números y máximo 4"
             return cadena_errores;
       }
 
