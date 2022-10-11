@@ -20,6 +20,7 @@ function validarFormulario() {
     mensaje += validCodPos();
     mensaje += validarTelefono();
     mensaje += numerosPositive(); //
+    mensaje += validFecha();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -195,6 +196,14 @@ function validarTelefono(){
 poder tener dos o cuatro dígitos. */
 
  function validFecha(){
-    
+    let cadena_errores = "";
+    let fecha=document.formulario.codigo_banco.value;
+    var RegExPattern = /^\d{1,2}\/\d{1,2}\/\d{2,4}$/;
+      if ((fecha.match(RegExPattern)) && (fecha!='')) {
+            return true;
+      } else {
+            cadena_errores+="Error, el año debe contener mínimo dos números y máximo 4"
+            return cadena_errores;
+      }
 
  }
