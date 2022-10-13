@@ -99,37 +99,66 @@ function validarRazon() {
 
 function validarDirec() {
     let cadena_errores = "";
-    let direccion = document.formulario.direccion.value;
-    let direcc = direccion.toLowerCase().trim();
+    let direcc = document.formulario.direccion.value;
+    
     //let valido = true;
     let caracteres = "ºª-/. ";
-    let enmedio = direcc.substr(1, direcc.length - 1);
-    if ((direcc.charAt(0) < "a" || direcc.charAt(0) > "z") && !caracteres.includes(enmedio)) {
+    let enmedio = direcc.substr(1, direcc.length - 2);
+    console.log(enmedio);
+    if (!esLetra(direcc.charAt(0))) {
         //valido = false;
         cadena_errores += "Error el primer caracter debe de ser una letra \n";
+    } else if(!esLetra(direcc.charAt(direcc.length-1)) && !esNumero(direcc.charAt(direcc.length-1))){
+        cadena_errores += "Error el último caracter debe de ser una letra o un número \n";
+    } else {
+        for(let i=0;i< enmedio.length;i++){
+            if(!esLetra(enmedio[i]) && !esNumero(enmedio[i]) && !caracteres.includes(enmedio[i])){
+                cadena_errores += "Error deben de ser caracteres permitidos \n";
+            }
+    
+        }
     }
+    
     //return valido;
     return cadena_errores;
 
 }
 //console.log(validarDirec("alle44"));
+function esLetra(str){ 
+    const letras="abcdefghijklmnñopqrstuvwxyzáéíóúü ";
+    str = str.toLowerCase();
+    for(let i=0;i< str.length;i++){
+        if(!(letras.includes(str[i]))){
+            return false;
+        }
+    }
+    return true;        
+}
+function esNumero(numero){
+if(numero.charCodeAt(0) < "0".charCodeAt(0) || numero.charCodeAt(0) > "9".charCodeAt(0)){
+    return false;
+}
+return true; 
+}
 
 function validLocalidad() {
     let cadena_errores = "";
     let local = document.formulario.codigo.value;
     let localidad = local.toLowerCase().trim();
     //let valido = true;
-    let resto = localidad.substr(1, localidad.length - 1);
-    let caracter = "áéíóúüñ  ";
-    if ((localidad.charAt(0) < "a" || localidad.charAt(0) > "z" || localidad.charAt(localidad.length - 1) < "a" || localidad.charAt(localidad.length - 1) > "z") && !caracter.includes(localidad.charAt(localidad.length - 1))) {
+    let resto = localidad.substr(1, localidad.length - 2);
+    let caracter = "áéíóúüñ ";
+    if (!esLetra(localidad.charAt(0)) || !esLetra(localidad.charAt(localidad.length - 1))) {
         //valido = false;
         cadena_errores += "Error el primer  y ultimo caracter debe de ser una letra \n";
-    }
-    for (let i = 0; i < resto.length; i++) {
-        if ((resto.charAt(i) < "a" || resto.charAt(i) > "z") && !caracter.includes(resto.charAt(i))) {
-            cadena_errores += "Error los caracteres deben de ser letras, se permite espacios\n";
+    } else {
+        for (let i = 0; i < resto.length; i++) {
+            if (!esLetra(resto[i]) && !caracter.includes(resto[i])) {
+                cadena_errores += "Error los caracteres deben de ser letras, se permite espacios\n";
+            }
         }
     }
+ 
     //return valido;
     return cadena_errores;
 }
