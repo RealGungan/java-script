@@ -24,7 +24,9 @@ function validarFormulario() {
     mensaje += botonSelect();
     mensaje += validarOpction();
     mensaje += validarNumeroCuenta();
+    mensaje+= validCodControl();
     mensaje += validarIban();
+    mensaje+= controlCodBanco();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
