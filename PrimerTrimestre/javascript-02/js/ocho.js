@@ -27,6 +27,7 @@ function validarFormulario() {
     mensaje+= validCodControl();
     mensaje += validarIban();
     mensaje+= controlCodBanco();
+    mensaje+= validCodPos();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -167,28 +168,39 @@ function validLocalidad() {
 //console.log(validLocalidad("comunidad4 d6 madrid"));
 
 function validCodPos() {
-    let valido = true;
 
+    let errores="";
     let codPos = document.formulario.codigo_postal.value;
     let cp = parseInt(codPos);
     console.log(cp);
-    if (cp < 1000 || cp > 52999) {
-        valido = false;
+    if (cp < 1000 || cp > 52999 || codPos.length==0 || codPos.length>5) {
+        let mensajeError= "El codigo postal no es correcto";
+        document.formulario.provincia.value = mensajeError;
+        errores = mensajeError;
+        
     }
-    return valido;
+    return errores;
 }
 
 function cambioCodPos() {
-    let cadena_errores;
-    if (!validCodPos()) {
+
+    let cadena_errores = validCodPos();
+    if (validCodPos().length > 0) {
         console.log("no es valido");
-        return cadena_errores += "El CP uede tener valores comprendidos entre 1000 y 52999\n";
+        return cadena_errores += "El CP puede tener valores comprendidos entre 1000 y 52999\n";
 
     } else {
         let codigoPostal = document.formulario.codigo_postal.value;
-        let initial = parseInt(codigoPostal.substring(0, 2) - 1);
-        //console.log("initial "+initial);
+        let initial;
+        if(codigoPostal.length==4){
+            initial = parseInt(codigoPostal.substring(0, 1) - 1);
+        }else{
+            initial = parseInt(codigoPostal.substring(0, 2) - 1);
+        }
+       
 
+        
+        
 
         let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Avila', 'Badajoz', 'Islas Baleares', 'Barcelona', 'Burgos', 'Cáceres',
             'Cádiz', 'Castellón', 'Ciudad Real', 'Córdoba', 'La Coruña', 'Cuenca', 'Gerona', 'Granada', 'Guadalajara',
@@ -199,11 +211,11 @@ function cambioCodPos() {
         document.formulario.provincia.value = provincias[initial];
         //console.log(" es valido");
 
+   
     }
 
-
 }
-
+// 
 function validarTelefono() {
     let cadena_errores = "";
     let telefono = document.formulario.telefono.value;
