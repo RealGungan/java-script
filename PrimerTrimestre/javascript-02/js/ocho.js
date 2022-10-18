@@ -24,7 +24,9 @@ function validarFormulario() {
     mensaje += botonSelect();
     mensaje += validarOpction();
     mensaje += validarNumeroCuenta();
+    mensaje+= validCodControl();
     mensaje += validarIban();
+    mensaje+= controlCodBanco();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -53,7 +55,7 @@ function validarCodEmp() {
     if (codigo_emp.length < 5 || codigo_emp.length > 10) {
         //document.getElementById("codigo_empresa").style.borderColor = "red";
         //valido = false;
-        cadena_errores += "Error la longitud no es correcta \n";
+        cadena_errores += "En codigo empleado Error la longitud no es correcta,debe de ser entre 5 y 10 \n";
     }
     // if (codigo_emp.charAt(0) < "a" || codigo_emp.charAt(0) > "z") {
     //     //valido = false;
@@ -72,13 +74,13 @@ function validarRazon() {
 
     if (razon.charAt(0) >= "A" && razon.charAt(0) <= "Z") {
     } else {
-        cadena_errores += "Error el primer caracter es incorreecto \n";
+        cadena_errores += "En validar razón, Error el primer caracter es incorreecto, debe ser una letra \n";
         //alert("Error el primer caracter es incorreecto");
         // validado = false;
     }
     if ((razon.substr(-1) >= "A" && razon.substr(-1) <= "Z") || razon.substr(-1) == "." || !isNaN(razon.substr(-1))) {
     } else {
-        cadena_errores += "Error el ultimo caracter es incorreecto \n";
+        cadena_errores += "En validar razón, Error el ultimo caracter es incorreecto \n";
         // alert("Error el ultimo caracter es incorreecto");
         // validado = false;
 
@@ -87,7 +89,7 @@ function validarRazon() {
     for (let i = 1; i < razon.length - 2; i++) {
 
         if (!(razon.charAt(i) >= "A" && razon.charAt(i) <= "Z") || razon[i] == "ª" || razon[i] == "º" || razon[i] == "-" || razon[i] == "." || !isNaN(razon[i])) {
-            cadena_errores += "Error hay un caracter incorrecto en el nombre \n";
+            cadena_errores += "En validar razón,Error hay un caracter incorrecto en el nombre \n";
             // alert("Error");
             // validado = false;
 
@@ -99,37 +101,66 @@ function validarRazon() {
 
 function validarDirec() {
     let cadena_errores = "";
-    let direccion = document.formulario.direccion.value;
-    let direcc = direccion.toLowerCase().trim();
+    let direcc = document.formulario.direccion.value;
+    
     //let valido = true;
     let caracteres = "ºª-/. ";
-    let enmedio = direcc.substr(1, direcc.length - 1);
-    if ((direcc.charAt(0) < "a" || direcc.charAt(0) > "z") && !caracteres.includes(enmedio)) {
+    let enmedio = direcc.substr(1, direcc.length - 2);
+    console.log(enmedio);
+    if (!esLetra(direcc.charAt(0))) {
         //valido = false;
         cadena_errores += "Error el primer caracter debe de ser una letra \n";
+    } else if(!esLetra(direcc.charAt(direcc.length-1)) && !esNumero(direcc.charAt(direcc.length-1))){
+        cadena_errores += "Error el último caracter debe de ser una letra o un número \n";
+    } else {
+        for(let i=0;i< enmedio.length;i++){
+            if(!esLetra(enmedio[i]) && !esNumero(enmedio[i]) && !caracteres.includes(enmedio[i])){
+                cadena_errores += "Error deben de ser caracteres permitidos \n";
+            }
+    
+        }
     }
+    
     //return valido;
     return cadena_errores;
 
 }
 //console.log(validarDirec("alle44"));
+function esLetra(str){ 
+    const letras="abcdefghijklmnñopqrstuvwxyzáéíóúü ";
+    str = str.toLowerCase();
+    for(let i=0;i< str.length;i++){
+        if(!(letras.includes(str[i]))){
+            return false;
+        }
+    }
+    return true;        
+}
+function esNumero(numero){
+if(numero.charCodeAt(0) < "0".charCodeAt(0) || numero.charCodeAt(0) > "9".charCodeAt(0)){
+    return false;
+}
+return true; 
+}
 
 function validLocalidad() {
     let cadena_errores = "";
     let local = document.formulario.codigo.value;
     let localidad = local.toLowerCase().trim();
     //let valido = true;
-    let resto = localidad.substr(1, localidad.length - 1);
-    let caracter = "áéíóúüñ  ";
-    if ((localidad.charAt(0) < "a" || localidad.charAt(0) > "z" || localidad.charAt(localidad.length - 1) < "a" || localidad.charAt(localidad.length - 1) > "z") && !caracter.includes(localidad.charAt(localidad.length - 1))) {
+    let resto = localidad.substr(1, localidad.length - 2);
+    let caracter = "áéíóúüñ ";
+    if (!esLetra(localidad.charAt(0)) || !esLetra(localidad.charAt(localidad.length - 1))) {
         //valido = false;
         cadena_errores += "Error el primer  y ultimo caracter debe de ser una letra \n";
-    }
-    for (let i = 0; i < resto.length; i++) {
-        if ((resto.charAt(i) < "a" || resto.charAt(i) > "z") && !caracter.includes(resto.charAt(i))) {
-            cadena_errores += "Error los caracteres deben de ser letras, se permite espacios\n";
+    } else {
+        for (let i = 0; i < resto.length; i++) {
+            if (!esLetra(resto[i]) && !caracter.includes(resto[i])) {
+                cadena_errores += "Error los caracteres deben de ser letras, se permite espacios\n";
+            }
         }
     }
+ 
     //return valido;
     return cadena_errores;
 }
@@ -176,7 +207,7 @@ function cambioCodPos() {
 function validarTelefono() {
     let cadena_errores = "";
     let telefono = document.formulario.telefono.value;
-    if (telefono.length != 9 || telefono.charAt(0) != "6" || telefono.charAt(0) != "9" || telefono.charAt(0) != "7") {
+    if (telefono.length != 9 && (telefono.charAt(0) != "6" || telefono.charAt(0) != "9" || telefono.charAt(0) != "7")) {
         cadena_errores += "Error, el teléfono debe contener 9 números y debe empezar por 6,9 ó 7 \n";
 
     }
@@ -197,35 +228,44 @@ function numerosPositive() {
 }
 
 function validFecha() {
+   
     let cadena_errores = "";
     let fecha = document.formulario.fechac.value;
     var fechaf = fecha.split("/");
     var day = fechaf[0];
     var month = fechaf[1];
     var year = fechaf[2];
-    if ((day.length == 2 || day.length == 1) && (month.length == 2 || month.length == 1) && (year.length == 4 || year.length == 2)) {
-        return true;
-    } else {
-        cadena_errores += "Error,los días tienen que ser entre 1 o 2 numeros al igual que los meses, el año debe contener 2 o 4 números \n";
-        return cadena_errores;
-    }
+    if (!(day.length == 2 || day.length == 1) || !(month.length == 2 || month.length == 1) || !(year.length == 4 || year.length == 2)) {
+      cadena_errores += "En campo fecha,Error,los días tienen que ser entre 1 o 2 numeros al igual que los meses, el año debe contener 2 o 4 números\n";
+    } 
+    return cadena_errores;
 }
 
 
 
+function iterateOverRadioGroups(listOfRadioButtons) {
+    for (var i = 0; i < listOfRadioButtons.length; i++) {
+        if (listOfRadioButtons[i].checked) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 function botonSelect() {
     let cadena_errores = "";
-    let radio = document.formulario.radios.checked;
-    let sector = document.formulario.sector.checked;
-    let tipo = document.formulario.tipo.checked;
-    if (!radio) {
-        cadena_errores += "Es obligatorio elegir una opción en personal\n ";
+    let radio = document.formulario.radios;
+    let sector = document.formulario.sector;
+    let tipo = document.formulario.tipo;
+    if (!iterateOverRadioGroups(radio)) {
+        cadena_errores += "No has seleccionado personal\n ";
     }
-    if (!sector) {
-        cadena_errores += "Es obligatorio elegir una opción de sector económico\n ";
+    if (!iterateOverRadioGroups(sector)) {
+        cadena_errores += "No has seleccionado sector\n ";
     }
-    if (!tipo) {
-        cadena_errores += "Es obligatorio elegir una opción de tipo de empresa\n ";
+    if (!iterateOverRadioGroups(tipo)) {
+        cadena_errores += "No has seleccionado tipo\n ";
 
     }
     return cadena_errores;
