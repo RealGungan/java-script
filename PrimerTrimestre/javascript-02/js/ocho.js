@@ -24,10 +24,10 @@ function validarFormulario() {
     mensaje += botonSelect();
     mensaje += validarOpction();
     mensaje += validarNumeroCuenta();
-    mensaje+= validCodControl();
+    mensaje += validCodControl();
     mensaje += validarIban();
-    mensaje+= controlCodBanco();
-    mensaje+= validCodPos();
+    mensaje += controlCodBanco();
+    mensaje += validCodPos();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -197,11 +197,6 @@ function cambioCodPos() {
         }else{
             initial = parseInt(codigoPostal.substring(0, 2) - 1);
         }
-       
-
-        
-        
-
         let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Avila', 'Badajoz', 'Islas Baleares', 'Barcelona', 'Burgos', 'Cáceres',
             'Cádiz', 'Castellón', 'Ciudad Real', 'Córdoba', 'La Coruña', 'Cuenca', 'Gerona', 'Granada', 'Guadalajara',
             'Guipúzcoa', 'Huelva', 'Huesca', 'Jaén', 'León', 'Lérida', 'La Rioja', 'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Navarra',
@@ -209,9 +204,7 @@ function cambioCodPos() {
             'Teruel', 'Toledo', 'Valencia', 'Valladolid', 'Vizcaya', 'Zamora', 'Zaragoza', 'Ceuta', 'Melilla'];
 
         document.formulario.provincia.value = provincias[initial];
-        //console.log(" es valido");
-
-   
+        //console.log(" es valido");   
     }
 
 }
@@ -357,3 +350,4 @@ function validarIban() {
     return cadena_errores;
 
 }
+
