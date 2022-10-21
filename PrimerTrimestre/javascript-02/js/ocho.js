@@ -364,7 +364,9 @@ function validarDesplegable() {
             counter++;
         }
     }
-    if (counter < 2) cadena_errores = "tiene que seleccionar al menos dos comunidades";
+    if (counter < 2){
+        cadena_errores = "tiene que seleccionar al menos dos comunidades";
+    } 
     return cadena_errores;
 
 }
