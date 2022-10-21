@@ -28,6 +28,7 @@ function validarFormulario() {
     mensaje += validarIban();
     mensaje += controlCodBanco();
     mensaje += validCodPos();
+    mensaje += validarDesplegable();
     if (mensaje.length > 0) {
         alert(mensaje);
         enviar = false;
@@ -103,7 +104,7 @@ function validarRazon() {
 function validarDirec() {
     let cadena_errores = "";
     let direcc = document.formulario.direccion.value;
-    
+
     //let valido = true;
     let caracteres = "ºª-/. ";
     let enmedio = direcc.substr(1, direcc.length - 2);
@@ -111,37 +112,37 @@ function validarDirec() {
     if (!esLetra(direcc.charAt(0))) {
         //valido = false;
         cadena_errores += "Error el primer caracter debe de ser una letra \n";
-    } else if(!esLetra(direcc.charAt(direcc.length-1)) && !esNumero(direcc.charAt(direcc.length-1))){
+    } else if (!esLetra(direcc.charAt(direcc.length - 1)) && !esNumero(direcc.charAt(direcc.length - 1))) {
         cadena_errores += "Error el último caracter debe de ser una letra o un número \n";
     } else {
-        for(let i=0;i< enmedio.length;i++){
-            if(!esLetra(enmedio[i]) && !esNumero(enmedio[i]) && !caracteres.includes(enmedio[i])){
+        for (let i = 0; i < enmedio.length; i++) {
+            if (!esLetra(enmedio[i]) && !esNumero(enmedio[i]) && !caracteres.includes(enmedio[i])) {
                 cadena_errores += "Error deben de ser caracteres permitidos \n";
             }
-    
+
         }
     }
-    
+
     //return valido;
     return cadena_errores;
 
 }
 //console.log(validarDirec("alle44"));
-function esLetra(str){ 
-    const letras="abcdefghijklmnñopqrstuvwxyzáéíóúü ";
+function esLetra(str) {
+    const letras = "abcdefghijklmnñopqrstuvwxyzáéíóúü ";
     str = str.toLowerCase();
-    for(let i=0;i< str.length;i++){
-        if(!(letras.includes(str[i]))){
+    for (let i = 0; i < str.length; i++) {
+        if (!(letras.includes(str[i]))) {
             return false;
         }
     }
-    return true;        
+    return true;
 }
-function esNumero(numero){
-if(numero.charCodeAt(0) < "0".charCodeAt(0) || numero.charCodeAt(0) > "9".charCodeAt(0)){
-    return false;
-}
-return true; 
+function esNumero(numero) {
+    if (numero.charCodeAt(0) < "0".charCodeAt(0) || numero.charCodeAt(0) > "9".charCodeAt(0)) {
+        return false;
+    }
+    return true;
 }
 
 function validLocalidad() {
@@ -161,7 +162,7 @@ function validLocalidad() {
             }
         }
     }
- 
+
     //return valido;
     return cadena_errores;
 }
@@ -169,15 +170,15 @@ function validLocalidad() {
 
 function validCodPos() {
 
-    let errores="";
+    let errores = "";
     let codPos = document.formulario.codigo_postal.value;
     let cp = parseInt(codPos);
     console.log(cp);
-    if (cp < 1000 || cp > 52999 || codPos.length==0 || codPos.length>5) {
-        let mensajeError= "El codigo postal no es correcto";
+    if (cp < 1000 || cp > 52999 || codPos.length == 0 || codPos.length > 5) {
+        let mensajeError = "El codigo postal no es correcto";
         document.formulario.provincia.value = mensajeError;
         errores = mensajeError;
-        
+
     }
     return errores;
 }
@@ -192,9 +193,9 @@ function cambioCodPos() {
     } else {
         let codigoPostal = document.formulario.codigo_postal.value;
         let initial;
-        if(codigoPostal.length==4){
+        if (codigoPostal.length == 4) {
             initial = parseInt(codigoPostal.substring(0, 1) - 1);
-        }else{
+        } else {
             initial = parseInt(codigoPostal.substring(0, 2) - 1);
         }
         let provincias = ['Alava', 'Albacete', 'Alicante', 'Almería', 'Avila', 'Badajoz', 'Islas Baleares', 'Barcelona', 'Burgos', 'Cáceres',
@@ -233,7 +234,7 @@ function numerosPositive() {
 }
 
 function validFecha() {
-   
+
     let cadena_errores = "";
     let fecha = document.formulario.fechac.value;
     var fechaf = fecha.split("/");
@@ -241,8 +242,8 @@ function validFecha() {
     var month = fechaf[1];
     var year = fechaf[2];
     if (!(day.length == 2 || day.length == 1) || !(month.length == 2 || month.length == 1) || !(year.length == 4 || year.length == 2)) {
-      cadena_errores += "En campo fecha,Error,los días tienen que ser entre 1 o 2 numeros al igual que los meses, el año debe contener 2 o 4 números\n";
-    } 
+        cadena_errores += "En campo fecha,Error,los días tienen que ser entre 1 o 2 numeros al igual que los meses, el año debe contener 2 o 4 números\n";
+    }
     return cadena_errores;
 }
 
@@ -338,15 +339,32 @@ function validarIban() {
     console.log(iban.charAt(0));
     if ((iban.charAt(0) < "A" || iban.charAt(0) > "Z") || (iban.charAt(1) < "A" || iban.charAt(1) > "Z")) {
         cadena_errores += "Error: el código IBAN debe empezar por dos letras. \n";
-    } 
+    }
     if (isNaN(iban.substring(2, iban.length))) {
         cadena_errores += "Error: los siguientes caracteres del iban deben de ser numeros \n";
     }
     console.log(iban);
-     if (!comprobar_IBAN(iban)) {
-        cadena_errores += "El IBAN introducido no es correcto";
-     }
+    if (!comprobar_IBAN(iban)) {
+        cadena_errores += "El IBAN introducido no es correcto\n";
+    }
 
+    return cadena_errores;
+
+}
+
+function validarDesplegable() {
+    let cadena_errores = "";
+    let indice = document.formulario.comunidades.options;
+    let counter = 0;
+    
+    for (let i = 0; i < indice.length; i++) {
+        
+        if (indice[i].selected) {
+            console.log("----"+i);
+            counter++;
+        }
+    }
+    if (counter < 2) cadena_errores = "tiene que seleccionar al menos dos comunidades";
     return cadena_errores;
 
 }
