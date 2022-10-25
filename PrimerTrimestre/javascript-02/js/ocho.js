@@ -2,9 +2,6 @@ window.onload = inicio;
 function inicio() {
     document.formulario.onsubmit = validarFormulario;
     document.formulario.codigo_postal.oninput = cambioCodPos;
-
-
-
 }
 
 
