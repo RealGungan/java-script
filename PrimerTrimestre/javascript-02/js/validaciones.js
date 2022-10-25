@@ -70,6 +70,7 @@ function esCif(cadenaCif) {
     let sumaImpares = 0;
     let formato1 = "ABCDEFGHJUV";
     let formato2 = "PQRSW";
+
     if (cadenaCif.length != 9) {
         //controlamos que no sea distinto de 9
         return 0;//dato no valido o no es cif
@@ -99,55 +100,21 @@ function esCif(cadenaCif) {
         resultado = 0;
     }
     //segun el formato que sea modificamos la ultima letra de la cadena o bien segun el resultado será una letra 
+
     if (formato1.includes(cadenaCif[0])) {
         if (resultado == cadenaCif[8]) {
             return 1; //cif correcto
         }
     }
     if (formato2.includes(cadenaCif[0])) {
-        switch (resultado) {
-            case 0:
-                if (cadenaCif[8] == "J")
-                    return 1; //cif correcto
-                break;
-            case 1:
-                if (cadenaCif[8] == "A")
-                    return 1;
-                break;
-            case 2:
-                if (cadenaCif[8] == "B")
-                    return 1;
-                break;
-            case 3:
-                if (cadenaCif[8] == "C")
-                    return 1;
-                break;
-            case 4:
-                if (cadenaCif[8] == "D")
-                    return 1;
-                break;
-            case 5:
-                if (cadenaCif[8] == "E")
-                    return 1;
-                break;
-            case 6:
-                if (cadenaCif[8] == "F")
-                    return 1;
-                break;
-            case 7:
-                if (cadenaCif[8] == "G")
-                    return 1;
-                break;
-            case 8:
-                if (cadenaCif[8] == "H")
-                    return 1;
-                break;
-            case 9:
-                if (cadenaCif[8] == "I")
-                    return 1;
-                break;
+        let arr = new Array();
+        arr = ['J', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+        if (cadenaCif[8] == arr[resultado]) {
+            return 1;
         }
     }
+
+
     return 2; //cif erroneo o caracter de control erroneo
 
 }
